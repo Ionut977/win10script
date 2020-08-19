@@ -37,6 +37,7 @@ $tweaks = @(
 	"InstallVLC",
 	"InstallWinRAR",
 	"InstallNotepadplusplus",
+	"InstallSpotify",
 	"Installqbittorent",
 	"Installrufus",
 	"InstallAdobe",
@@ -110,6 +111,7 @@ $tweaks = @(
 	# "DisableFastStartup",         # "EnableFastStartup",
 
 	### UI Tweaks ###
+	"AddUltimatePerformancePowerPlan",
 	#"DisableActionCenter",          # "EnableActionCenter",
 	#"DisableLockScreen",            # "EnableLockScreen",
 	#"DisableLockScreenRS1",       # "EnableLockScreenRS1",
@@ -134,7 +136,7 @@ $tweaks = @(
 	"EnableNumlock",             	# "DisableNumlock",
 	"EnableDarkMode",				# "DisableDarkMode",
 	"Stop-EdgePDF",
-
+	
 	### Explorer UI Tweaks ###
 	"ShowKnownExtensions",          # "HideKnownExtensions",
 	"ShowHiddenFiles",              # "HideHiddenFiles",
@@ -234,6 +236,11 @@ Function InstallWinRAR {
 Function InstallNotepadplusplus {
 	Write-Output "Installing Notepad++"
 	choco install notepadplusplus -y
+}
+
+Function InstallSpotify {
+        Write-Output "Installing Spotify"
+	choco install spotify -y
 }
 
 Function Installqbittorent {
@@ -1216,6 +1223,12 @@ Function EnableFastStartup {
 ##########
 # UI Tweaks
 ##########
+
+# Add Ultimate Performance Power Plan
+Function AddUltimatePerformancePowerPlan {
+	Write-Output "Adding Ultimate Performance Power Plan"
+        powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+}
 
 # Disable Action Center
 Function DisableActionCenter {
