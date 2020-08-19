@@ -44,6 +44,7 @@ $tweaks = @(
 	"InstallCPU-Z",
 	"InstallMediaPlayerClassic",
 	"InstallGraphicsCardApp",
+	"InstallLinkShellExtension",
 
 	### Windows Apps
 	"DebloatAll",
@@ -279,6 +280,11 @@ Function InstallGraphicsCardApp{
     if ($graphicsName -like "*Radeon*"){
         $LocalTempDir = $env:TEMP;$AdrenalinInstaller = "AdrenalinInstaller.exe";(new-object System.Net.WebClient).DownloadFile('https://drivers.amd.com/drivers/beta/Win10-Radeon-Software-Adrenalin-2020-Edition-20.7.2-July14.exe', "$LocalTempDir\$AdrenalinInstaller"); & "$LocalTempDir\$AdrenalinInstaller" /silent /install; $Process2Monitor = "AdrenalinInstaller"; Do { $ProcessesFound = Get-Process | ?{$Process2Monitor -contains $_.Name} | Select-Object -ExpandProperty Name; If ($ProcessesFound) { "Still running: $($ProcessesFound -join ', ')" | Write-Host; Start-Sleep -Seconds 2 } else { rm "$LocalTempDir\$AdrenalinInstaller" -ErrorAction SilentlyContinue -Verbose } } Until (!$ProcessesFound)
     }
+}
+
+Function InstallLinkShellExtension {
+	Write-Output "Installing Link ShellExtension"
+	choco install linkshellextension -y
 }
 
 ##########
