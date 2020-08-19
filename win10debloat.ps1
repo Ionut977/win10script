@@ -28,16 +28,22 @@
 $tweaks = @(
 	### Require administrator privileges ###
 	"RequireAdmin",
+	"CreateRestorePoint",
 
 	### External Program Setup
 	"InstallTitusProgs", #REQUIRED FOR OTHER PROGRAM INSTALLS!
 	"InstallChrome",
+	"InstallDefaultBrowser",
 	"InstallVLC",
 	"InstallWinRAR",
+	"InstallNotepadplusplus",
+	"Installqbittorent",
+	"Installrufus",
 	"InstallAdobe",
 	"Install7Zip",
 	"InstallNotepadplusplus",
 	"InstallMediaPlayerClassic",
+	"InstallGraphicsCardApp",
 
 	### Windows Apps
 	"DebloatAll",
@@ -209,6 +215,11 @@ Function InstallChrome {
 	choco install googlechrome -y
 }
 
+Function InstallDefaultBrowser {
+	Write-Output "Installing Default Browser"
+	choco install setdefaultbrowser -y
+}
+
 Function InstallVLC {
 	Write-Output "Installing VLC"
 	choco install vlc -y
@@ -218,6 +229,22 @@ Function InstallWinRAR {
 	Write-Output "Installing Winrar"
 	choco install winrar -y
 }
+
+Function InstallNotepadplusplus {
+	Write-Output "Installing Notepad++"
+	choco install notepadplusplus -y
+}
+
+Function Installqbittorent {
+        Write-Output "Installing qbittorent"
+	choco install qbittorrent -y
+}
+
+Function Installrufus {
+        Write-Output "Installing rufus"
+	choco install rufus -y
+}
+
 
 Function InstallAdobe {
 	Write-Output "Installing Adobe Acrobat Reader"
@@ -242,6 +269,16 @@ Function InstallNotepadplusplus {
 Function InstallMediaPlayerClassic {
 	Write-Output "Installing Media Player Classic (VLC Alternative)"
 	choco install mpc-hc -y
+}
+
+Function InstallGraphicsCardApp{
+    $graphicsName = gwmi win32_VideoController | FL Name | Out-String
+    if ($graphicsName -like "*NVIDIA*"){
+      choco install geforce-experience -y
+    }
+    if ($graphicsName -like "*Radeon*"){
+        $LocalTempDir = $env:TEMP;$AdrenalinInstaller = "AdrenalinInstaller.exe";(new-object System.Net.WebClient).DownloadFile('https://drivers.amd.com/drivers/beta/Win10-Radeon-Software-Adrenalin-2020-Edition-20.7.2-July14.exe', "$LocalTempDir\$AdrenalinInstaller"); & "$LocalTempDir\$AdrenalinInstaller" /silent /install; $Process2Monitor = "AdrenalinInstaller"; Do { $ProcessesFound = Get-Process | ?{$Process2Monitor -contains $_.Name} | Select-Object -ExpandProperty Name; If ($ProcessesFound) { "Still running: $($ProcessesFound -join ', ')" | Write-Host; Start-Sleep -Seconds 2 } else { rm "$LocalTempDir\$AdrenalinInstaller" -ErrorAction SilentlyContinue -Verbose } } Until (!$ProcessesFound)
+    }
 }
 
 ##########
