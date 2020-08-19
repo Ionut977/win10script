@@ -34,18 +34,18 @@ $tweaks = @(
 	"InstallTitusProgs", #REQUIRED FOR OTHER PROGRAM INSTALLS!
 	"InstallChrome",
 	"InstallDefaultBrowser",
-	"InstallVLC",
 	"InstallWinRAR",
+	"Installrufus",
 	"InstallNotepadplusplus",
+	"InstallVLC",
 	"InstallSpotify",
 	"Installqbittorent",
-	"Installrufus",
-	"InstallAdobe",
-	"Install7Zip",
 	"InstallCPU-Z",
-	"InstallMediaPlayerClassic",
+	"InstallAdobe",
 	"InstallGraphicsCardApp",
-	"InstallLinkShellExtension",
+	#"InstallMediaPlayerClassic",
+	#"Install7Zip",
+	#"InstallLinkShellExtension",
 
 	### Windows Apps
 	"DebloatAll",
@@ -223,19 +223,24 @@ Function InstallDefaultBrowser {
 	choco install setdefaultbrowser -y
 }
 
-Function InstallVLC {
-	Write-Output "Installing VLC"
-	choco install vlc -y
-}
-
 Function InstallWinRAR {
 	Write-Output "Installing Winrar"
 	choco install winrar -y
 }
 
+Function Installrufus {
+        Write-Output "Installing rufus"
+	choco install rufus -y
+}
+
 Function InstallNotepadplusplus {
 	Write-Output "Installing Notepad++"
 	choco install notepadplusplus -y
+}
+
+Function InstallVLC {
+	Write-Output "Installing VLC"
+	choco install vlc -y
 }
 
 Function InstallSpotify {
@@ -248,35 +253,14 @@ Function Installqbittorent {
 	choco install qbittorrent -y
 }
 
-Function Installrufus {
-        Write-Output "Installing rufus"
-	choco install rufus -y
-}
-
-
-Function InstallAdobe {
-	Write-Output "Installing Adobe Acrobat Reader"
-	choco install adobereader -y
-}
-
-Function InstallJava {
-	Write-Output "Installing Java"
-	choco install jre8 -y
-}
-
-Function Install7Zip {
-	Write-Output "Installing 7-Zip"
-	choco install 7zip -y
-}
-
 Function InstallCPU-Z {
 	Write-Output "Installing CPU-Z"
 	choco install cpu-z -y
 }
 
-Function InstallMediaPlayerClassic {
-	Write-Output "Installing Media Player Classic (VLC Alternative)"
-	choco install mpc-hc -y
+Function InstallAdobe {
+	Write-Output "Installing Adobe Acrobat Reader"
+	choco install adobereader -y
 }
 
 Function InstallGraphicsCardApp{
@@ -287,6 +271,21 @@ Function InstallGraphicsCardApp{
     if ($graphicsName -like "*Radeon*"){
         $LocalTempDir = $env:TEMP;$AdrenalinInstaller = "AdrenalinInstaller.exe";(new-object System.Net.WebClient).DownloadFile('https://drivers.amd.com/drivers/beta/Win10-Radeon-Software-Adrenalin-2020-Edition-20.7.2-July14.exe', "$LocalTempDir\$AdrenalinInstaller"); & "$LocalTempDir\$AdrenalinInstaller" /silent /install; $Process2Monitor = "AdrenalinInstaller"; Do { $ProcessesFound = Get-Process | ?{$Process2Monitor -contains $_.Name} | Select-Object -ExpandProperty Name; If ($ProcessesFound) { "Still running: $($ProcessesFound -join ', ')" | Write-Host; Start-Sleep -Seconds 2 } else { rm "$LocalTempDir\$AdrenalinInstaller" -ErrorAction SilentlyContinue -Verbose } } Until (!$ProcessesFound)
     }
+}
+
+Function InstallJava {
+	Write-Output "Installing Java"
+	choco install jre8 -y
+}
+
+Function InstallMediaPlayerClassic {
+	Write-Output "Installing Media Player Classic (VLC Alternative)"
+	choco install mpc-hc -y
+}
+
+Function Install7Zip {
+	Write-Output "Installing 7-Zip"
+	choco install 7zip -y
 }
 
 Function InstallLinkShellExtension {
