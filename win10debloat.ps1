@@ -41,6 +41,7 @@ $tweaks = @(
 	"Installrufus",
 	"InstallAdobe",
 	"Install7Zip",
+	"InstallCPU-Z",
 	"InstallNotepadplusplus",
 	"InstallMediaPlayerClassic",
 	"InstallGraphicsCardApp",
@@ -259,6 +260,11 @@ Function InstallJava {
 Function Install7Zip {
 	Write-Output "Installing 7-Zip"
 	choco install 7zip -y
+}
+
+Function InstallCPU-Z {
+	Write-Output "Installing CPU-Z"
+	choco install cpu-z -y
 }
 
 Function InstallNotepadplusplus {
