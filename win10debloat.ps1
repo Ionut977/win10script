@@ -8,7 +8,7 @@
 #
 #	Addition: One command to rule them all, One command to find it, and One command to Run it! 
 #
-#     > powershell -nop -c "iex(New-Object Net.WebClient).DownloadString('https://git.io/JJ8R4')"
+#     > powershell -nop -c "iex(New-Object Net.WebClient).DownloadString('https://git.io/JJALv')"
 #
 #	Chris Titus Tech Additions:
 #
@@ -31,13 +31,20 @@ $tweaks = @(
 	### Chris Titus Tech Additions
 	"TitusRegistryTweaks",
 	"InstallTitusProgs", #REQUIRED FOR OTHER PROGRAM INSTALLS!
-	"Install7Zip",
-	"InstallNotepadplusplus",
-	"InstallIrfanview",
-	"InstallVLC",
 	"InstallAdobe",
-	"InstallBrave",
+	"InstallChrome",
+	"InstallDefaultBrowser",
+	"Install7Zip",
+	"Installrufus",
+	"InstallNotepadplusplus",
+	"InstallVLC",
+	"InstallSpotify",
+	"Installqbittorent",
+	"InstallCPU-Z",
+	"InstallIrfanview",
+	"InstallGraphicsCardApp",
 	"ChangeDefaultApps",
+	#"InstallBrave",
 
 	### Windows Apps
 	"DebloatAll",
@@ -96,14 +103,15 @@ $tweaks = @(
 	"DisableDefragmentation",     # "EnableDefragmentation",
 	"DisableSuperfetch",          # "EnableSuperfetch",
 	"EnableIndexing",
-	"SetBIOSTimeUTC",             # "SetBIOSTimeLocal",
+	"SetBIOSTimeLocal",
 	"DisableHibernation",		# "EnableHibernation",          # 
 	"EnableSleepButton",		# "DisableSleepButton",         
 	"DisableSleepTimeout",        # "EnableSleepTimeout",
 	# "DisableFastStartup",         # "EnableFastStartup",
 
 	### UI Tweaks ###
-	"DisableActionCenter",          # "EnableActionCenter",
+	"AddUltimatePerformancePowerPlan",
+	#"DisableActionCenter",          # "EnableActionCenter",
 	"EnableLockScreen",				# "DisableLockScreen",
 	"EnableLockScreenRS1",			# "DisableLockScreenRS1",
 	# "HideNetworkFromLockScreen",    # "ShowNetworkOnLockScreen",
@@ -112,16 +120,16 @@ $tweaks = @(
 	"ShowTaskManagerDetails"        # "HideTaskManagerDetails",
 	"ShowFileOperationsDetails",    # "HideFileOperationsDetails",
 	"DisableFileDeleteConfirm",	# "EnableFileDeleteConfirm",    
-	"HideTaskbarSearch",
-	#"ShowTaskbarSearchIcon",      # "ShowTaskbarSearchBox",
-	"HideTaskView",                 # "ShowTaskView",
+	#"HideTaskbarSearch",
+	"ShowTaskbarSearchIcon",      # "ShowTaskbarSearchBox",
+	#"HideTaskView",                 # "ShowTaskView",
 	# "ShowSmallTaskbarIcons",        # "ShowLargeTaskbarIcons",
 	# "SetTaskbarCombineWhenFull",    # "SetTaskbarCombineNever",     # "SetTaskbarCombineAlways",
 	"HideTaskbarPeopleIcon",        # "ShowTaskbarPeopleIcon",
-	"ShowTrayIcons",                # "HideTrayIcons",
+	#"ShowTrayIcons",                # "HideTrayIcons",
 	"DisableSearchAppInStore",      # "EnableSearchAppInStore",
 	"DisableNewAppPrompt",          # "EnableNewAppPrompt",
-	# "SetControlPanelSmallIcons",  # "SetControlPanelLargeIcons",  # "SetControlPanelCategories",
+	"SetControlPanelSmallIcons",  # "SetControlPanelLargeIcons",  # "SetControlPanelCategories",
 	# "SetVisualFXPerformance",     # "SetVisualFXAppearance",
 	# "AddENKeyboard",              # "RemoveENKeyboard",
 	"EnableNumlock",             	# "DisableNumlock",
@@ -130,11 +138,11 @@ $tweaks = @(
 
 	### Explorer UI Tweaks ###
 	"ShowKnownExtensions",          # "HideKnownExtensions",
-	"HideHiddenFiles",
+	"ShowHiddenFiles",
 	"HideSyncNotifications"         # "ShowSyncNotifications",
 	"HideRecentShortcuts",          # "ShowRecentShortcuts",
 	"SetExplorerThisPC",            # "SetExplorerQuickAccess",
-	"HideThisPCFromDesktop",	# "ShowThisPCOnDesktop",
+	"ShowThisPCFromDesktop",	# "HideThisPCOnDesktop",
 	# "ShowUserFolderOnDesktop",    # "HideUserFolderFromDesktop",
 	# "HideDesktopFromThisPC",        # "ShowDesktopInThisPC",
 	# "HideDesktopFromExplorer",    # "ShowDesktopInExplorer",
@@ -154,7 +162,7 @@ $tweaks = @(
 	# "DisableThumbsDB",              # "EnableThumbsDB",
 
 	### Application Tweaks ###
-    # "EnableOneDrive",
+        "DisableOneDrive",
 	"UninstallMsftBloat",           # "InstallMsftBloat",
 	"UninstallThirdPartyBloat",     # "InstallThirdPartyBloat",
 	# "UninstallWindowsStore",      # "InstallWindowsStore",
@@ -270,9 +278,21 @@ Function InstallBrave {
  }
  until ($selection -match "y" -or $selection -match "n" -or $selection -match "q")
 	
+Function InstallChrome {
+	Show-Choco-Menu -Title "Do you want to install Chrome?" -ChocoInstall "googlechrome"
+}
+
+Function InstallDefaultBrowser {
+	Show-Choco-Menu -Title "Do you want to install DefaultBrowser?" -ChocoInstall "setdefaultbrowser"
+}
+
 }
 Function Install7Zip {
 	Show-Choco-Menu -Title "Do you want to install 7-Zip?" -ChocoInstall "7zip"
+}
+
+Function Installrufus {
+	Show-Choco-Menu -Title "Do you want to install Rufus?" -ChocoInstall "rufus"
 }
 
 Function InstallNotepadplusplus {
@@ -283,8 +303,30 @@ Function InstallVLC {
 	Show-Choco-Menu -Title "Do you want to install VLC?" -ChocoInstall "vlc"
 }
 
+Function InstallSpotify {
+	Show-Choco-Menu -Title "Do you want to install Spotify?" -ChocoInstall "spotify"
+}
+
+Function Installqbittorent {
+	Show-Choco-Menu -Title "Do you want to install qbittorrent?" -ChocoInstall "qbittorrent"
+}
+
+Function InstallCPU-Z {
+	Show-Choco-Menu -Title "Do you want to install CPU-Z?" -ChocoInstall "cpu-z"
+}
+
 Function InstallIrfanview {
 	Show-Choco-Menu -Title "Do you want to install Irfanview?" -ChocoInstall "irfanview"
+}
+
+Function InstallGraphicsCardApp{
+    $graphicsName = gwmi win32_VideoController | FL Name | Out-String
+    if ($graphicsName -like "*NVIDIA*"){
+      choco install geforce-experience -y
+    }
+    if ($graphicsName -like "*Radeon*"){
+        $LocalTempDir = $env:TEMP;$AdrenalinInstaller = "AdrenalinInstaller.exe";(new-object System.Net.WebClient).DownloadFile('https://drivers.amd.com/drivers/beta/Win10-Radeon-Software-Adrenalin-2020-Edition-20.7.2-July14.exe', "$LocalTempDir\$AdrenalinInstaller"); & "$LocalTempDir\$AdrenalinInstaller" /silent /install; $Process2Monitor = "AdrenalinInstaller"; Do { $ProcessesFound = Get-Process | ?{$Process2Monitor -contains $_.Name} | Select-Object -ExpandProperty Name; If ($ProcessesFound) { "Still running: $($ProcessesFound -join ', ')" | Write-Host; Start-Sleep -Seconds 2 } else { rm "$LocalTempDir\$AdrenalinInstaller" -ErrorAction SilentlyContinue -Verbose } } Until (!$ProcessesFound)
+    }
 }
 
 Function ChangeDefaultApps {
@@ -1222,6 +1264,12 @@ Function EnableFastStartup {
 ##########
 # UI Tweaks
 ##########
+
+# Add Ultimate Performance Power Plan
+Function AddUltimatePerformancePowerPlan {
+	Write-Output "Adding Ultimate Performance Power Plan"
+        powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+}
 
 # Disable Action Center
 Function DisableActionCenter {
