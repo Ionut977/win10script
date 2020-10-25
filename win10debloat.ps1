@@ -137,6 +137,7 @@ $tweaks = @(
 	"Stop-EdgePDF",
 
 	### Explorer UI Tweaks ###
+	"EnableCheckboxes",
 	"ShowKnownExtensions",          # "HideKnownExtensions",
 	"ShowHiddenFiles",
 	"HideSyncNotifications"         # "ShowSyncNotifications",
@@ -1636,6 +1637,13 @@ Function DisableNumlock {
 ##########
 # Explorer UI Tweaks
 ##########
+
+# Enable Checkboxes
+Function EnableCheckboxes {
+	Write-Output "Enabling Checkboxes..."
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "AutoCheckSelect" -Type DWord -Value 1
+}
+
 
 # Show known file extensions
 Function ShowKnownExtensions {
